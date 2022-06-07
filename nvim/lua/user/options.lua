@@ -2,11 +2,13 @@
 vim.g.mapleader = " "
 vim.cmd [[colorscheme tokyonight]]
 vim.opt.undodir = '/Users/antoinesaliba/.vim/undo'
-vim.g.ruby_path = '/Users/antoinesaliba/.rvm/rubies/ruby-2.7.1/bin/ruby'
 
 --Hardcode which python so starting vim is faster
 vim.g.python_host_prog  = '/usr/local/bin/python'
 vim.g.python3_host_prog = '/usr/local/bin/python3'
+
+vim.g.rspec_command = "bundle exec rspec {spec}"
+vim.g['test#strategy'] = "neovim"
 
 vim.opt.hidden = true --Required to keep multiple buffers open multiple buffers
 vim.opt.wrap = false --Display long lines as just one line
