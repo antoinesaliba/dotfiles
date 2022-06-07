@@ -5,11 +5,6 @@ local term_opts = { silent = true }
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
---Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
@@ -18,9 +13,14 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Normal --
+--Remap space as leader key
+keymap("", "<Space>", "<Nop>", opts)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 keymap("n", ":W", ":w", opts)
 keymap("n", '<Bslash><Bslash>c', ":noh<return>", opts)
+
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
@@ -41,9 +41,6 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
--- Insert --
-
--- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
@@ -53,18 +50,44 @@ keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
--- Visual Block --
 -- Move text up and down
 keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
--- Terminal --
 -- Better terminal navigation
 keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+-- keymap("t", "<Esc>", "<C-\\><C-n>", term_opts)
 
+-- FZF --
 keymap("n", ";", ":FZF<CR>", opts)
+
+-- Rspec --
+keymap("n", "<Bslash>f", ":TestFile<CR>", opts)
+keymap("n", "<Bslash>s", ":TestNearest<CR>", opts)
+keymap("n", "<Bslash>l", ":TestLast<CR>", opts)
+
+-- Hop --
+keymap('n', 'f', "<cmd>lua require'hop'.hint_words({ current_line_only = false, inclusive_jump = false })<cr>", {})
+keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ current_line_only = false, inclusive_jump = false })<cr>", {})
+
+-- Fugitive --
+keymap('n', "<space>ga", ":Git add %:p<CR><CR>", opts)
+keymap('n', "<space>gs", ":Git<CR>", opts)
+keymap('n', "<space>gc", ":Git commit -v -q %<CR>", opts)
+keymap('n', "<space>gt", ":Git commit -v -q %:p<CR>", opts)
+keymap('n', "<space>gd", ":Gdiff<CR>", opts)
+keymap('n', "<space>ge", ":Gedit<CR>", opts)
+keymap('n', "<space>gr", ":Gread<CR>", opts)
+keymap('n', "<space>gw", ":Gwrite<CR><CR>", opts)
+keymap('n', "<space>gm", ":Gmove<Space>", opts)
+keymap('n', "<space>go", ":Git checkout<Space>", opts)
+keymap('n', "<space>gp", ":Git! push<CR>", opts)
+keymap('n', "<space>gl", ":Git! pull<CR>", opts)
+
+-- ToggleTerm --
+keymap("n", "<c-q>", "<cmd>lua _Toggleterm_rails() <CR>", opts)
