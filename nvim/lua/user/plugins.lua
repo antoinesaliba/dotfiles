@@ -48,20 +48,20 @@ return packer.startup(function(use)
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   -- use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons"
-  use "akinsho/bufferline.nvim"
+  -- use "akinsho/bufferline.nvim"
   use 'folke/tokyonight.nvim'
   -- use "moll/vim-bbye"
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
-  -- use "akinsho/toggleterm.nvim"
+  use "akinsho/toggleterm.nvim"
   -- use "ahmedkhalf/project.nvim"
   use "lewis6991/impatient.nvim"
   -- use "lukas-reineke/indent-blankline.nvim"
   -- use "goolord/alpha-nvim"
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
-  use "folke/which-key.nvim"
+  -- use "folke/which-key.nvim"
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
@@ -69,10 +69,10 @@ return packer.startup(function(use)
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
-  -- use "hrsh7th/cmp-buffer" -- buffer completions
-  -- use "hrsh7th/cmp-path" -- path completions
-  -- use "hrsh7th/cmp-cmdline" -- cmdline completions
-  -- use "saadparwaiz1/cmp_luasnip" -- snippet completions
+  use "hrsh7th/cmp-buffer" -- buffer completions
+  use "hrsh7th/cmp-path" -- path completions
+  use "hrsh7th/cmp-cmdline" -- cmdline completions
+  use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
 
   -- snippets
@@ -94,20 +94,26 @@ return packer.startup(function(use)
     run = ":TSUpdate",
   }
 
-  -- use 'tpope/vim-endwise'
-  -- use 'prettier/vim-prettier'
-  -- use 'thoughtbot/vim-rspec'
+  use 'tpope/vim-endwise'
+  use 'thoughtbot/vim-rspec'
   -- use 'ngmy/vim-rubocop'
-  -- use 'janko/vim-test'
-  -- use 'tpope/vim-fugitive'
+  use 'janko/vim-test'
+  use 'tpope/vim-fugitive'
   use 'tpope/vim-commentary'
   use 'gbprod/cutlass.nvim'
   use 'jghauser/mkdir.nvim'
   use 'mboughaba/vim-lessmess'
-  -- use 'tpope/vim-dispatch'
-  -- use 'tpope/vim-repeat'
+  use 'tpope/vim-dispatch'
+  use 'tpope/vim-repeat'
   -- use 'alvan/vim-closetag'
-  -- use 'easymotion/vim-easymotion'
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v1', -- optional but strongly recommended
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+    end
+  }
   -- use 'skywind3000/vim-rt-format', { 'do': 'pip3 install autopep8' }
   use 'eugen0329/vim-esearch'
   -- use 'danchoi/ri.vim'
@@ -117,6 +123,8 @@ return packer.startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use { 'junegunn/fzf', run = ":call fzf#install()" }
   use { 'junegunn/fzf.vim' }
+  use { 'kristijanhusak/vim-create-pr' }
+  use { 'ludovicchabant/vim-gutentags' }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
