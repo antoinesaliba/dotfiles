@@ -29,6 +29,6 @@ null_ls.setup({
     diagnostics.standardrb,
     diagnostics.eslint,
     formatting.prettier,
-    formatting.standardrb
+    -- formatting.standardrb
   },
 })
