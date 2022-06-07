@@ -40,3 +40,99 @@ vim.opt.wildignore = '*.class'
 vim.opt.redrawtime = 10000
 vim.opt.mouse = 'a'
 vim.cmd('set iskeyword+=-')
+vim.opt.showtabline = 2 -- always show tab bar
+
+-- ESearch Plugin Settings
+vim.cmd [[
+  let g:esearch = {}
+
+  " Use regex matching with the smart case mode by default and avoid matching text-objects.
+  let g:esearch.regex   = 1
+  let g:esearch.textobj = 0
+  let g:esearch.case    = 'sensitive'
+
+  " Set the initial pattern content using the highlighted '/' pattern (if
+  " v:hlsearch is true), the last searched pattern or the clipboard content.
+  let g:esearch.prefill = []
+
+  " Override the default files and directories to determine your project root. Set it
+  " to blank to always use the current working directory.
+  let g:esearch.root_markers = ['.git', 'Makefile', 'node_modules']
+
+  " Prevent esearch from adding any default keymaps.
+  let g:esearch.default_mappings = 1
+
+  " Start the search only when the enter is hit instead of updating the pattern while you're typing.
+  let g:esearch.live_update = 1
+
+  " How many lines to display before and after the search result found
+  let g:esearch.context = 2
+
+  " Open the search window in a vertical split and reuse it for all further searches.
+  let g:esearch.name = 'search'
+]]
+
+-- Custom Tab Line --
+vim.cmd('hi! TabLineFill guibg=#24283b') -- make tab line background color the same as my theme instead of black (should update if theme is changed)
+vim.cmd [[
+set tabline=%!MyTabLine()
+function! MyTabLine()
+  let s = ''
+  " loop through each tab page
+  for i in range(tabpagenr('$'))
+    if i + 1 == tabpagenr()
+      let s .= '%#TabLineSel#'
+    else
+      let s .= '%#TabLine#'
+    endif
+    if i + 1 == tabpagenr()
+      let s .= '%#TabLineSel#' " WildMenu
+    else
+      let s .= '%#Title#'
+    endif
+    " set the tab page number (for mouse clicks)
+    let s .= '%' . (i + 1) . 'T '
+    " set page number string
+    let s .= i + 1 . ''
+    " get buffer names and statuses
+    let n = ''  " temp str for buf names
+    let m = 0   " &modified counter
+    let buflist = tabpagebuflist(i + 1)
+    " loop through each buffer in a tab
+    for b in buflist
+      if getbufvar(b, "&buftype") == 'help'
+        " let n .= '[H]' . fnamemodify(bufname(b), ':t:s/.txt$//')
+      elseif getbufvar(b, "&buftype") == 'quickfix'
+        " let n .= '[Q]'
+      elseif getbufvar(b, "&modifiable")
+        let n .= fnamemodify(bufname(b), ':t') . ', ' " pathshorten(bufname(b))
+      endif
+      if getbufvar(b, "&modified")
+        let m += 1
+      endif
+    endfor
+    " let n .= fnamemodify(bufname(buflist[tabpagewinnr(i + 1) - 1]), ':t')
+    let n = substitute(n, ', $', '', '')
+    " add modified label
+    if m > 0
+      let s .= '+'
+      " let s .= '[' . m . '+]'
+    endif
+    if i + 1 == tabpagenr()
+      let s .= ' %#TabLineSel#'
+    else
+      let s .= ' %#TabLine#'
+    endif
+    " add buffer names
+    if n == ''
+      let s.= '[New]'
+    else
+      let s .= n
+    endif
+    " switch to no underlining and add final space
+    let s .= ' '
+  endfor
+  let s .= '%#TabLineFill#%T'
+  return s
+endfunction
+]]
