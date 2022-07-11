@@ -61,7 +61,7 @@ keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
--- keymap("t", "<Esc>", "<C-\\><C-n>", term_opts)
+keymap("t", "<Esc>", "<C-\\><C-n>", term_opts)
 
 -- FZF --
 keymap("n", ";", ":FZF<CR>", opts)
@@ -78,7 +78,7 @@ keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ current_line_only = false, 
 -- Fugitive --
 keymap('n', "<space>ga", ":Git add %:p<CR><CR>", opts)
 keymap('n', "<space>gs", ":Git<CR>", opts)
-keymap('n', "<space>gc", ":Git commit -v -q %<CR>", opts)
+keymap('n', "<space>gc", ":Git commit -n -v -q %<CR>", opts)
 keymap('n', "<space>gt", ":Git commit -v -q %:p<CR>", opts)
 keymap('n', "<space>gd", ":Gdiff<CR>", opts)
 keymap('n', "<space>ge", ":Gedit<CR>", opts)
