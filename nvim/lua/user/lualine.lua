@@ -42,23 +42,15 @@ local branch = {
   icon = "",
 }
 
-local location = {
-  "location",
-  padding = 0,
-}
-
--- cool function for progress
-local progress = "%5p%%"
-
 lualine.setup({
   options = {
-    globalstatus = true,
+    globalstatus = false,
     icons_enabled = true,
     theme = "dracula",
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
-    always_divide_middle = true,
+    always_divide_middle = true
   },
   sections = {
     lualine_a = { branch, diagnostics },
@@ -66,14 +58,14 @@ lualine.setup({
     lualine_c = { "filename" },
     -- lualine_x = { "encoding", "fileformat", "filetype" },
     lualine_x = { diff, filetype },
-    lualine_y = { location },
-    lualine_z = { progress },
+    -- lualine_y = { location },
+    -- lualine_z = { progress },
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
     lualine_c = { "filename" },
-    lualine_x = { "location" },
+    -- lualine_x = { location },
     lualine_y = {},
     lualine_z = {},
   },
