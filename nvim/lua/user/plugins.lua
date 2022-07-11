@@ -124,7 +124,7 @@ return packer.startup(function(use)
   use { 'junegunn/fzf', run = ":call fzf#install()" }
   use { 'junegunn/fzf.vim' }
   use { 'kristijanhusak/vim-create-pr' }
-  use { 'ludovicchabant/vim-gutentags' }
+  -- use { 'ludovicchabant/vim-gutentags' }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
