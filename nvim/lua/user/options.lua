@@ -21,7 +21,6 @@ vim.opt.tabstop = 2 --Insert 2 spaces for a tab
 vim.opt.shiftwidth = 2 --Change the number of space characters inserted for indentation
 vim.opt.expandtab = true --Converts tabs to spaces
 vim.opt.smartindent = true --Makes indenting smart
-vim.opt.laststatus = 0 --Always display the status line
 vim.opt.number = true --Line numbers
 vim.opt.relativenumber = true --Relative line numbers
 vim.opt.background = 'dark' --Tell vim what the background color looks like
