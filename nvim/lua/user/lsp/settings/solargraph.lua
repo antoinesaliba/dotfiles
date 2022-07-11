@@ -1,7 +1,7 @@
 local util = require("lspconfig/util")
 
 local opts = {
-  cmd = { "bundle", "exec", "solargraph", "stdio" },
+  cmd = { "solargraph", "stdio" },
   filetypes = { "ruby" },
   init_options = {
     formatting = false,
@@ -9,7 +9,7 @@ local opts = {
   root_dir = util.root_pattern("Gemfile", ".git"),
   settings = {
     solargraph = {
-      autoformat = true,
+      commandPath = "/Users/antoinesaliba/.rvm/gems/ruby-2.7.5/bin/solargraph",
       completion = true,
       diagnostic = true,
       folding = true,
