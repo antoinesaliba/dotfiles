@@ -1,0 +1,6 @@
+# “\e[A”: history-search-backward
+# “\e[B”: history-search-forward
+# bindkey "^[[A" history-beginning-search-backward
+# bindkey "^[[B" history-beginning-search-forward
+"\e[B": history-search-forward
+"\e[A": history-search-backward

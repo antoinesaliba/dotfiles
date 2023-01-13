@@ -1,0 +1,9 @@
+vendor/
+sorbet/
+**/.keep
+**/app/assets/*
+templates/
+/public/
+.git/
+/tmp/
+log/
