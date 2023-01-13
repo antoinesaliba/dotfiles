@@ -84,6 +84,7 @@ return packer.startup(function(use)
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use "jose-elias-alvarez/typescript.nvim"
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
@@ -127,6 +128,9 @@ return packer.startup(function(use)
   -- use { 'ludovicchabant/vim-gutentags' }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
+  use 'https://github.com/aklt/plantuml-syntax'
+  use 'https://github.com/tyru/open-browser.vim.git'
+  use 'https://github.com/weirongxu/plantuml-previewer.vim.git'
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
