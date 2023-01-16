@@ -1,6 +1,6 @@
 --vim.opt.leader key
 vim.g.mapleader = " "
-vim.opt.undodir = '/Users/antoinesaliba/.vim/undo'
+vim.opt.undodir = '~/.vim/undo'
 
 --Hardcode which python so starting vim is faster
 vim.g.python_host_prog  = '/usr/local/bin/python'
