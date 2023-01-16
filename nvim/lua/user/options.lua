@@ -1,6 +1,5 @@
 --vim.opt.leader key
 vim.g.mapleader = " "
-vim.cmd [[colorscheme tokyonight]]
 vim.opt.undodir = '/Users/antoinesaliba/.vim/undo'
 
 --Hardcode which python so starting vim is faster
