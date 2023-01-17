@@ -9,6 +9,7 @@
     ~/.inputrc: inputrc
     ~/.config/zsh/aliases: zsh/aliases
     ~/.config/zsh/exports: zsh/exports
+    ~/.preztorc: prezto/zpreztorc
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
