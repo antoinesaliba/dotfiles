@@ -1,0 +1,22 @@
+[user]
+  email = asaliba@justworks.com
+  name = Antoine Saliba
+[push]
+  default = current
+[core]
+  excludesfile = /Users/antoinesaliba/.gitignore_global
+  attributesfile = /Users/antoinesaliba/.gitattributes
+  editor = vim
+[alias]
+  set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+[init]
+  templatedir = ~/.git_template
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true

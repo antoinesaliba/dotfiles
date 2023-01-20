@@ -10,6 +10,7 @@
     ~/.config/zsh/aliases: zsh/aliases
     ~/.config/zsh/exports: zsh/exports
     ~/.preztorc: prezto/zpreztorc
+    ~/.gitconfig: git/gitconfig
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
