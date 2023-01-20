@@ -1,0 +1,16 @@
+export NVM_LAZY_LOAD=true
+export NVM_COMPLETION=true
+
+# make neovim the default text editor
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
+export RUBYOPT="-W0"
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+export HISTFILE=~/.zsh_history
+export HISTSIZE=999999999
+export SAVEHIST=$HISTSIZE
+setopt hist_ignore_all_dups

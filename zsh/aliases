@@ -1,0 +1,16 @@
+alias vi=nvim
+alias dc=docker-compose
+alias dcra="docker ps -aq | xargs docker stop | xargs docker rm"
+alias dcri="docker images -aq | xargs docker rmi"
+alias dcls="dc ps -a"
+alias cw="cd ~/Repositories/clockwork_web"
+alias ef="cd ~/Repositories/emerald-falcon"
+alias df="cd ~/Repositories/dotfiles/"
+alias gs="git status"
+alias gau="git add -u"
+alias gaa="git add ."
+alias gc="git commit -m"
+alias tc="srb tc"
+
+# move files to the trash instead of deleting
+alias rm=trash
