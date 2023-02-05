@@ -91,3 +91,6 @@ keymap('n', "<space>gl", ":Git! pull<CR>", opts)
 
 -- ToggleTerm --
 keymap("n", "<c-q>", "<cmd>lua _Toggleterm_rails() <CR>", opts)
+
+-- Lazygit --
+keymap("n", "<space>ww", ":LazyGitCurrentFile<CR>", opts)

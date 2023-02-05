@@ -133,6 +133,8 @@ return packer.startup(function(use)
   use 'https://github.com/tyru/open-browser.vim.git'
   use 'https://github.com/weirongxu/plantuml-previewer.vim.git'
 
+  use 'kdheepak/lazygit.nvim'
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

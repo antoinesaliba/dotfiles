@@ -14,3 +14,5 @@ alias tc="srb tc"
 
 # move files to the trash instead of deleting
 alias rm=trash
+
+alias lg=lazygit

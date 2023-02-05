@@ -28,7 +28,7 @@ source ~/.zshrc
 command -v brew >/dev/null 2>&1 || { echo >&2 "Installing Homebrew"; \
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; }
 
-brew install neovim fzf
+brew install neovim fzf ripgrep trash standard jesseduffield/lazygit/lazygit
 
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
 setopt EXTENDED_GLOB
