@@ -6,11 +6,13 @@ alias dcls="dc ps -a"
 alias cw="cd ~/Repositories/clockwork_web"
 alias ef="cd ~/Repositories/emerald-falcon"
 alias df="cd ~/Repositories/dotfiles/"
+alias dt="cd ~/Repositories/diamond-turkey/"
 alias gs="git status"
 alias gau="git add -u"
 alias gaa="git add ."
 alias gc="git commit -m"
 alias tc="srb tc"
+alias tf="terraform"
 
 # move files to the trash instead of deleting
 alias rm=trash

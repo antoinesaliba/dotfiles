@@ -1,3 +1,5 @@
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
 [user]
   email = asaliba@justworks.com
   name = Antoine Saliba
@@ -17,6 +19,6 @@
   process = git-lfs filter-process
   required = true
 [pull]
-	rebase = true
+  rebase = true
 [rebase]
-	autoStash = true
+  autoStash = true

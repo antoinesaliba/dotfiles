@@ -4,9 +4,9 @@ local M = {}
 M.setup = function()
   local signs = {
     { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
+    { name = "DiagnosticSignWarn",  text = "" },
+    { name = "DiagnosticSignHint",  text = "" },
+    { name = "DiagnosticSignInfo",  text = "" },
   }
 
   for _, sign in ipairs(signs) do
@@ -87,7 +87,7 @@ M.on_attach = function(client, bufnr)
   -- vim.notify(client.name .. " starting...")
   -- TODO: refactor this into a method that checks if string in list
   if client.name == "tsserver" then
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.document_formatting = false
   end
 
   -- if client.resolved_capabilities.document_formatting then

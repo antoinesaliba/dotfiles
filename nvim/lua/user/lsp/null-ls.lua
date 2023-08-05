@@ -27,8 +27,8 @@ null_ls.setup({
   debug = false,
   sources = {
     diagnostics.standardrb,
-    -- diagnostics.eslint,
     formatting.prettier,
-    formatting.standardrb
+    formatting.standardrb,
+    formatting.black
   },
 })

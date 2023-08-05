@@ -11,6 +11,7 @@
     ~/.config/zsh/exports: zsh/exports
     ~/.preztorc: prezto/zpreztorc
     ~/.gitconfig: git/gitconfig
+    ~/.ripgreprc: rg/ripgreprc
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

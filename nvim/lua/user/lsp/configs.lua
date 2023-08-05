@@ -6,7 +6,7 @@ end
 local lspconfig = require("lspconfig")
 
 -- servers installed on my devices : When you install a sever add this to this list
-local servers = { "sumneko_lua", "terraformls", "solargraph", "tsserver" }
+local servers = { "lua_ls", "terraformls", "solargraph", "tsserver", "pylyzer" }
 
 lsp_installer.setup {
   ensure_installed = servers

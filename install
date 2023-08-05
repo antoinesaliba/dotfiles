@@ -28,7 +28,7 @@ source ~/.zshrc
 command -v brew >/dev/null 2>&1 || { echo >&2 "Installing Homebrew"; \
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; }
 
-brew install neovim fzf ripgrep trash standard jesseduffield/lazygit/lazygit
+brew install neovim fzf ripgrep trash standard jesseduffield/lazygit/lazygit awscli session-manager-plugin node tree
 
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
 setopt EXTENDED_GLOB
@@ -41,3 +41,14 @@ done
 # Download fonts to show icons in neovim
 brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font
+
+# Install Terraform CLI
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform hashicorp/tap/terraform-ls
+
+# Use the highest possible version of node per-project
+nvm alias default node
+
+aws configure set region us-east-1
+
+npm install typescript --save-dev
