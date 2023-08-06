@@ -1,8 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-set -e
-
-################ Dotbot symlinks ################
+################ Dotbot symlinks - Do Not Update ################
 
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
@@ -16,7 +14,7 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
 
-################ After Dotbot symlinks ################
+################ Feel Free To Update Anything Below ################
 
 echo "export XDG_CONFIG_HOME=\"$HOME/.config\"" >> ~/.zshrc
 echo "export ZDOTDIR=\"$XDG_CONFIG_HOME/zsh\"" >> ~/.zshrc
@@ -28,27 +26,34 @@ source ~/.zshrc
 command -v brew >/dev/null 2>&1 || { echo >&2 "Installing Homebrew"; \
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; }
 
-brew install neovim fzf ripgrep trash standard jesseduffield/lazygit/lazygit awscli session-manager-plugin node tree
+brew bundle --file=- <<-EOS
+brew "neovim"
+brew "fzf"
+brew "ripgrep"
+brew "trash"
+brew "standard"
+brew "jesseduffield/lazygit/lazygit"
+brew "awscli"
+brew "node"
+brew "tree"
+brew "nvm"
+brew "hashicorp/tap/terraform"
+brew "hashicorp/tap/terraform-ls"
+cask "homebrew/cask-fonts/font-hack-nerd-font"
+cask "session-manager-plugin"
+EOS
 
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
-setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done
+if [ ! -d "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto" ] ; then
+  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
+  setopt EXTENDED_GLOB
+  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+  done
+fi
 
 /opt/homebrew/opt/fzf/install --all --xdg
-
-# Download fonts to show icons in neovim
-brew tap homebrew/cask-fonts
-brew install --cask font-hack-nerd-font
-
-# Install Terraform CLI
-brew tap hashicorp/tap
-brew install hashicorp/tap/terraform hashicorp/tap/terraform-ls
 
 # Use the highest possible version of node per-project
 nvm alias default node
 
 aws configure set region us-east-1
-
-npm install typescript --save-dev
