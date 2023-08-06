@@ -5,10 +5,16 @@
 - clean: ['~']
 
 - link:
-    ~/.config/nvim: nvim
+    ~/.config/nvim:
+      create: true
+      path: nvim
     ~/.inputrc: inputrc
-    ~/.config/zsh/aliases: zsh/aliases
-    ~/.config/zsh/exports: zsh/exports
+    ~/.config/zsh/aliases:
+      create: true
+      path: zsh/aliases
+    ~/.config/zsh/exports:
+      create: true
+      path: zsh/exports
     ~/.preztorc: prezto/zpreztorc
     ~/.gitconfig: git/gitconfig
     ~/.ripgreprc: rg/ripgreprc

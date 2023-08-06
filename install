@@ -16,15 +16,17 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 
 ################ Feel Free To Update Anything Below ################
 
-echo "export XDG_CONFIG_HOME=\"$HOME/.config\"" >> ~/.zshrc
-echo "export ZDOTDIR=\"$XDG_CONFIG_HOME/zsh\"" >> ~/.zshrc
-echo "source ${XDG_CONFIG_HOME}/zsh/aliases" >> ~/.zshrc
-echo "source ${XDG_CONFIG_HOME}/zsh/exports" >> ~/.zshrc
+echo 'export XDG_CONFIG_HOME="$HOME/.config"' >> ~/.zshrc
+echo 'export ZDOTDIR="$XDG_CONFIG_HOME/zsh"' >> ~/.zshrc
+echo 'source $ZDOTDIR/aliases' >> ~/.zshrc
+echo 'source $ZDOTDIR/exports' >> ~/.zshrc
 source ~/.zshrc
 
 # Check to see if Homebrew is installed, and install it if it is not
 command -v brew >/dev/null 2>&1 || { echo >&2 "Installing Homebrew"; \
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; }
+
+echo "Updating Homebrew" && brew update
 
 brew bundle --file=- <<-EOS
 brew "neovim"
@@ -32,12 +34,10 @@ brew "fzf"
 brew "ripgrep"
 brew "trash"
 brew "standard"
-brew "jesseduffield/lazygit/lazygit"
+brew "lazygit"
 brew "awscli"
 brew "node"
 brew "tree"
-brew "nvm"
-brew "hashicorp/tap/terraform"
 brew "hashicorp/tap/terraform-ls"
 cask "homebrew/cask-fonts/font-hack-nerd-font"
 cask "session-manager-plugin"
@@ -51,9 +51,12 @@ if [ ! -d "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto" ] ; then
   done
 fi
 
-/opt/homebrew/opt/fzf/install --all --xdg
+$(brew --prefix)/opt/fzf/install --all --xdg
 
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
 # Use the highest possible version of node per-project
 nvm alias default node
 
 aws configure set region us-east-1
+
+echo "All Done!"
