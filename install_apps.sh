@@ -1,23 +1,4 @@
-#!/usr/bin/env zsh
-
-################ Dotbot symlinks - Do Not Update ################
-
-CONFIG="install.conf.yaml"
-DOTBOT_DIR="dotbot"
-
-DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-cd "${BASEDIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-git submodule update --init --recursive "${DOTBOT_DIR}"
-
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
-if [ "${@}" = "--help" ]; then
-  return
-fi
-
-################ Feel Free To Update Anything Below ################
+#!/usr/bin/env bash
 
 echo 'export XDG_CONFIG_HOME="$HOME/.config"' >> ~/.zshrc
 echo 'export ZDOTDIR="$XDG_CONFIG_HOME/zsh"' >> ~/.zshrc
