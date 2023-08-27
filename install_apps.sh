@@ -1,14 +1,17 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-echo 'export XDG_CONFIG_HOME="$HOME/.config"' >> ~/.zshrc
-echo 'export ZDOTDIR="$XDG_CONFIG_HOME/zsh"' >> ~/.zshrc
-echo 'source $ZDOTDIR/aliases' >> ~/.zshrc
-echo 'source $ZDOTDIR/exports' >> ~/.zshrc
-source ~/.zshrc
+set -e
+
+grep -qxF 'export XDG_CONFIG_HOME="$HOME/.config"' ~/.zshrc || echo 'export XDG_CONFIG_HOME="$HOME/.config"' >> ~/.zshrc
+grep -qxF 'export ZDOTDIR="$XDG_CONFIG_HOME/zsh"' ~/.zshrc || echo 'export ZDOTDIR="$XDG_CONFIG_HOME/zsh"' >> ~/.zshrc
+grep -qxF 'source $ZDOTDIR/aliases' ~/.zshrc || echo 'source $ZDOTDIR/aliases' >> ~/.zshrc
+grep -qxF 'source $ZDOTDIR/exports' ~/.zshrc || echo 'source $ZDOTDIR/exports' >> ~/.zshrc
+grep -qxF 'source ~/.config/zsh/.zshrc' ~/.zshrc || echo 'source ~/.config/zsh/.zshrc' >> ~/.zshrc
+source ~/.zshrc && echo "Sourced .zshrc"
 
 # Check to see if Homebrew is installed, and install it if it is not
 command -v brew >/dev/null 2>&1 || { echo >&2 "Installing Homebrew"; \
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; }
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/testuser/.zprofile; eval "$(/opt/homebrew/bin/brew shellenv)" }
 
 echo "Updating Homebrew" && brew update
 
