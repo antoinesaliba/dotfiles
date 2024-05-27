@@ -7,8 +7,9 @@ alias gs="git status"
 alias gau="git add -u"
 alias gaa="git add ."
 alias gc="git commit -m"
-alias tc="srb tc"
+alias tc="srb tc --ignore=.git/"
 alias tf="terraform"
+alias kc="kubectl"
 
 # move files to the trash instead of deleting
 alias rm=trash

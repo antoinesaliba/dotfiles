@@ -6,10 +6,13 @@ vim.opt.undodir = vim.fn.expand('~/.vim/undo')
 vim.g.python_host_prog  = '/usr/local/bin/python'
 vim.g.python3_host_prog = '/usr/local/bin/python3'
 
-vim.g.rspec_command = "bundle exec rspec {spec}"
+vim.g.rspec_command = "LOG_LEVEL=info bundle exec spring rspec {spec}"
 vim.g['test#strategy'] = "neovim"
 vim.g['plantuml_previewer#debug_mode'] = 1
 
+vim.g.copilot_assume_mapped = true
+vim.g.node_host_prog = '/Users/antoinesaliba/.asdf/installs/nodejs/18.17.1/lib/node_modules'
+vim.g.copilot_node_command = '/Users/antoinesaliba/.asdf/shims/node'
 vim.opt.hidden = true --Required to keep multiple buffers open multiple buffers
 vim.opt.wrap = false --Display long lines as just one line
 vim.opt.pumheight = 10 --Makes popup menu smaller
@@ -82,7 +85,7 @@ vim.cmd [[
 
   " Override the default files and directories to determine your project root. Set it
   " to blank to always use the current working directory.
-  let g:esearch.root_markers = ['.git', 'Makefile', 'node_modules']
+  let g:esearch.root_markers = []
 
   " Prevent esearch from adding any default keymaps.
   let g:esearch.default_mappings = 1

@@ -135,6 +135,7 @@ return packer.startup(function(use)
 
   use 'kdheepak/lazygit.nvim'
   use 'sheerun/vim-polyglot'
+  use 'github/copilot.vim'
 
   use({
   "L3MON4D3/LuaSnip",
