@@ -3,6 +3,7 @@
   name = Antoine Saliba
 [push]
   default = current
+  autoSetupRemote = true
 [core]
   excludesfile = /Users/antoinesaliba/.gitignore_global
   attributesfile = /Users/antoinesaliba/.gitattributes
