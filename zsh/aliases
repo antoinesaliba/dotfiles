@@ -1,4 +1,4 @@
-alias vi=nvim
+alias vi='exec_scmb_expand_args /opt/homebrew/bin/nvim'
 alias dc=docker-compose
 alias dcra="docker ps -aq | xargs docker stop | xargs docker rm"
 alias dcri="docker images -aq | xargs docker rmi"
