@@ -1,42 +1,113 @@
 --vim.opt.leader key
-vim.g.mapleader = " "
-vim.opt.undodir = vim.fn.expand('~/.vim/undo')
+vim.g.mapleader                        = " "
+vim.opt.undodir                        = vim.fn.expand('~/.vim/undo')
 
 --Hardcode which python so starting vim is faster
-vim.g.python_host_prog  = '/usr/local/bin/python'
-vim.g.python3_host_prog = '/usr/local/bin/python3'
+vim.g.python_host_prog                 = '/usr/local/bin/python'
+vim.g.python3_host_prog                = '/usr/local/bin/python3'
 
-vim.g.rspec_command = "LOG_LEVEL=info bundle exec spring rspec {spec}"
-vim.g['test#strategy'] = "neovim"
 vim.g['plantuml_previewer#debug_mode'] = 1
 
-vim.g.copilot_assume_mapped = true
-vim.g.node_host_prog = '/Users/antoinesaliba/.asdf/installs/nodejs/18.17.1/lib/node_modules'
-vim.g.copilot_node_command = '/Users/antoinesaliba/.asdf/shims/node'
-vim.opt.hidden = true --Required to keep multiple buffers open multiple buffers
-vim.opt.wrap = false --Display long lines as just one line
-vim.opt.pumheight = 10 --Makes popup menu smaller
-vim.opt.fileencoding = 'utf-8' --The encoding written to file
-vim.opt.splitbelow = true --Horizontal splits will automatically be below
-vim.opt.splitright = true --Vertical splits will automatically be to the right
-vim.opt.conceallevel = 0 --So that I can see `` in markdown files
-vim.opt.tabstop = 2 --Insert 2 spaces for a tab
-vim.opt.shiftwidth = 2 --Change the number of space characters inserted for indentation
-vim.opt.expandtab = true --Converts tabs to spaces
-vim.opt.smartindent = true --Makes indenting smart
-vim.opt.number = true --Line numbers
-vim.opt.relativenumber = true --Relative line numbers
-vim.opt.background = 'dark' --Tell vim what the background color looks like
-vim.opt.backup = false --This is recommended by coc
-vim.opt.writebackup = false --This is recommended by coc
-vim.opt.updatetime = 300 --Faster completion
-vim.opt.timeoutlen = 500 --By default timeoutlen is 1000 ms
-vim.opt.showmode = false --We don't need to see things like -- INSERT -- anymore
+local function find_ruby_project_root()
+  local current_dir = vim.fn.expand('%:p:h')
+  local ruby_project_root = current_dir
+
+  while current_dir ~= "/" do
+    if vim.fn.glob(current_dir .. "/Gemfile") ~= "" or vim.fn.glob(current_dir .. "/.ruby-version") ~= "" then
+      ruby_project_root = current_dir
+      break
+    end
+    current_dir = vim.fn.fnamemodify(current_dir, ":h")
+  end
+
+  return ruby_project_root
+end
+
+local function get_test_command()
+  if vim.fn.expand('%:p'):match('spec') then
+    return 'LOG_LEVEL=info bundle exec rspec'
+  else
+    return 'LOG_LEVEL=info bundle exec m'
+  end
+end
+
+local function get_relative_path_from_root(root)
+  local file_path = vim.fn.expand('%:p')
+  local relative_path = file_path:sub(#root + 2)
+  return relative_path
+end
+
+vim.g['test#custom_strategies'] = {
+  custom_nearest = function()
+    if vim.bo.filetype ~= 'ruby' then
+      vim.g['test#strategy'] = 'neovim'
+      vim.cmd('TestFile')
+    else
+      local root = find_ruby_project_root()
+      local test_command = get_test_command()
+      local relative_path = get_relative_path_from_root(root)
+      local cmd = 'cd ' .. root .. ' && ' .. test_command .. ' ' .. relative_path .. ':' .. vim.fn.line('.')
+      vim.cmd('split | terminal ' .. cmd)
+    end
+  end,
+  custom_file = function()
+    if vim.bo.filetype ~= 'ruby' then
+      vim.g['test#strategy'] = 'neovim'
+      vim.cmd('TestFile')
+    else
+      local root = find_ruby_project_root()
+      local test_command = get_test_command()
+      local cmd = 'cd ' .. root .. ' && ' .. test_command .. ' ' .. vim.fn.expand('%')
+      vim.cmd('split | terminal ' .. cmd)
+    end
+  end,
+  custom_suite = function()
+    if vim.bo.filetype ~= 'ruby' then
+      vim.g['test#strategy'] = 'neovim'
+      vim.cmd('TestFile')
+    else
+      local root = find_ruby_project_root()
+      local test_command = get_test_command()
+      local cmd = 'cd ' .. root .. ' && ' .. test_command
+      vim.cmd('split | terminal ' .. cmd)
+    end
+  end,
+}
+
+vim.g['test#strategy']          = {
+  nearest = 'custom_nearest',
+  file = 'custom_file',
+  suite = 'custom_suite'
+}
+
+vim.g.copilot_assume_mapped     = true
+vim.g.node_host_prog            = '/Users/antoinesaliba/.asdf/installs/nodejs/18.17.1/lib/node_modules'
+vim.g.copilot_node_command      = '/Users/antoinesaliba/.asdf/shims/node'
+vim.opt.hidden                  = true    --Required to keep multiple buffers open multiple buffers
+vim.opt.wrap                    = false   --Display long lines as just one line
+vim.opt.pumheight               = 10      --Makes popup menu smaller
+vim.opt.fileencoding            = 'utf-8' --The encoding written to file
+vim.opt.splitbelow              = true    --Horizontal splits will automatically be below
+vim.opt.splitright              = true    --Vertical splits will automatically be to the right
+vim.opt.conceallevel            = 0       --So that I can see `` in markdown files
+vim.opt.tabstop                 = 2       --Insert 2 spaces for a tab
+vim.opt.shiftwidth              = 2       --Change the number of space characters inserted for indentation
+vim.opt.expandtab               = true    --Converts tabs to spaces
+vim.opt.smartindent             = true    --Makes indenting smart
+vim.opt.number                  = true    --Line numbers
+vim.opt.relativenumber          = true    --Relative line numbers
+vim.opt.background              = 'dark'  --Tell vim what the background color looks like
+vim.opt.backup                  = false   --This is recommended by coc
+vim.opt.writebackup             = false   --This is recommended by coc
+vim.opt.updatetime              = 300     --Faster completion
+vim.opt.timeoutlen              = 500     --By default timeoutlen is 1000 ms
+vim.opt.showmode                = false   --We don't need to see things like -- INSERT -- anymore
 vim.cmd('set formatoptions-=cro')
-vim.opt.clipboard = 'unnamedplus' --Copy paste between vim and everything else
-vim.opt.undofile = true --Enable undo even after file closed
-vim.opt.backspace = 'indent,eol,start' --Allow backspace over indentations, over end-of-line (eol) characters, and past when you entered Insert mode
-vim.opt.swapfile = false --Disable the creation of .swp files
+vim.opt.clipboard = 'unnamedplus'         --Copy paste between vim and everything else
+vim.opt.undofile = true                   --Enable undo even after file closed
+vim.opt.backspace =
+'indent,eol,start'                        --Allow backspace over indentations, over end-of-line (eol) characters, and past when you entered Insert mode
+vim.opt.swapfile = false                  --Disable the creation of .swp files
 -- vim.opt.tags='./.git/tags'                 --Directory where ctags info will be saved
 vim.opt.wildignore = '*.class'
 vim.opt.redrawtime = 10000
