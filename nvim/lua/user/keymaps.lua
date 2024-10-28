@@ -95,3 +95,6 @@ keymap("n", "<c-q>", "<cmd>lua _Toggleterm_rails() <CR>", opts)
 
 -- Lazygit --
 keymap("n", "<space>ww", ":LazyGitCurrentFile<CR>", opts)
+
+keymap("n", "<Tab>", "gT", opts)
+keymap("n", "q", "gt", opts)
