@@ -3,9 +3,9 @@ local fn = vim.fn
 -- Automatically install packer
 local ensure_packer = function()
   local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
     vim.cmd [[packadd packer.nvim]]
     return true
   end
@@ -43,8 +43,8 @@ packer.init {
 return packer.startup(function(use)
   use "wbthomason/packer.nvim" -- Have packer manage itself
   -- use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
+  use "nvim-lua/plenary.nvim"  -- Useful lua functions used ny lots of plugins
+  use "windwp/nvim-autopairs"  -- Autopairs, integrates with both cmp and treesitter
   -- use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons"
   -- use "akinsho/bufferline.nvim"
@@ -67,10 +67,10 @@ return packer.startup(function(use)
   -- use "lunarvim/darkplus.nvim"
 
   -- cmp plugins
-  use "hrsh7th/nvim-cmp" -- The completion plugin
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
+  use "hrsh7th/nvim-cmp"         -- The completion plugin
+  use "hrsh7th/cmp-buffer"       -- buffer completions
+  use "hrsh7th/cmp-path"         -- path completions
+  use "hrsh7th/cmp-cmdline"      -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
 
@@ -79,9 +79,9 @@ return packer.startup(function(use)
   -- use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
   -- LSP
-  use "neovim/nvim-lspconfig" -- enable LSP
+  use "neovim/nvim-lspconfig"           -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
-  use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
+  use "tamago324/nlsp-settings.nvim"    -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
   use "jose-elias-alvarez/typescript.nvim"
 
@@ -111,11 +111,11 @@ return packer.startup(function(use)
   use 'tpope/vim-repeat'
   -- use 'alvan/vim-closetag'
   use {
-  'phaazon/hop.nvim',
+    'phaazon/hop.nvim',
     branch = 'v2', -- optional but strongly recommended
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
-      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+      require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
     end
   }
   -- use 'skywind3000/vim-rt-format', { 'do': 'pip3 install autopep8' }
@@ -138,12 +138,12 @@ return packer.startup(function(use)
   use 'github/copilot.vim'
 
   use({
-  "L3MON4D3/LuaSnip",
-  -- follow latest release.
-  tag = "v<CurrentMajor>.*",
-  -- install jsregexp (optional!:).
-  run = "make install_jsregexp"
-})
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    tag = "v<CurrentMajor>.*",
+    -- install jsregexp (optional!:).
+    run = "make install_jsregexp"
+  })
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
