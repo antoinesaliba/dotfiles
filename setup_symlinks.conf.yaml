@@ -15,7 +15,9 @@
     ~/.config/zsh/exports:
       create: true
       path: zsh/exports
-    ~/.preztorc: prezto/zpreztorc
+    ~/.config/zsh/.zpreztorc:
+      create: true
+      path: prezto/zpreztorc
     ~/.gitconfig: git/gitconfig
     ~/.ripgreprc: rg/ripgreprc
 
