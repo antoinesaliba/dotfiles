@@ -4,6 +4,8 @@
 # # Exclude file types.
 --glob=!*.{lock,rbi}
 
+--no-messages
+
 # # Exclude files.
 # --glob=!{package-lock.json}
 

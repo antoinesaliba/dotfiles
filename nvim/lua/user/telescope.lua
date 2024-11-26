@@ -87,7 +87,7 @@ local M = {}
 
 function M.find_files()
   local opts = {
-    find_command = { "rg", "--files", "--hidden", "-g", "!db/" },
+    find_command = { "rg", "--files", "--hidden", "--no-messages", "-g", "!db/" },
     previewer = false,
     layout_config = { width = 0.95 },
   }
