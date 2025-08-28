@@ -96,7 +96,7 @@ vim.opt.expandtab               = true    --Converts tabs to spaces
 vim.opt.smartindent             = true    --Makes indenting smart
 vim.opt.number                  = true    --Line numbers
 vim.opt.relativenumber          = true    --Relative line numbers
-vim.opt.background              = 'dark'  --Tell vim what the background color looks like
+vim.opt.background              = 'light'  --Tell vim what the background color looks like
 vim.opt.backup                  = false   --This is recommended by coc
 vim.opt.writebackup             = false   --This is recommended by coc
 vim.opt.updatetime              = 300     --Faster completion
@@ -235,3 +235,5 @@ function! MyTabLine()
   return s
 endfunction
 ]]
+
+vim.opt.termguicolors = true

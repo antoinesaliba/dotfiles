@@ -49,6 +49,7 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-web-devicons"
   -- use "akinsho/bufferline.nvim"
   use 'folke/tokyonight.nvim'
+  use 'shaunsingh/solarized.nvim'
   -- use "moll/vim-bbye"
   use {
     'nvim-lualine/lualine.nvim',
@@ -144,6 +145,9 @@ return packer.startup(function(use)
     -- install jsregexp (optional!:).
     run = "make install_jsregexp"
   })
+
+  use "nvim-treesitter/nvim-treesitter-context"
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

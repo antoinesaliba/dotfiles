@@ -30,6 +30,9 @@ cask "homebrew/cask-fonts/font-hack-nerd-font"
 cask "session-manager-plugin"
 EOS
 
+curl -fsSL https://bun.sh/install | bash
+bun add -g @kkidd/aicommit
+
 if [ ! -d "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto" ] ; then
   git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
   setopt EXTENDED_GLOB
