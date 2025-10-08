@@ -8,6 +8,8 @@
   excludesfile = /Users/antoinesaliba/.gitignore_global
   attributesfile = /Users/antoinesaliba/.gitattributes
   editor = vim
+	untrackedCache = true
+	fsmonitor = true
 [alias]
   set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
 [init]
