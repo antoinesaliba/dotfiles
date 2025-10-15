@@ -1,7 +1,6 @@
--- For copilot.vim
--- vim.g.copilot_filetypes = {
---   ["*"] = false,
--- }
+vim.g.copilot_filetypes = {
+  ["*"] = true,
+}
 
 vim.cmd [[
   imap <silent><script><expr> <C-I> copilot#Accept("\<CR>")

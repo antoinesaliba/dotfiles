@@ -83,6 +83,12 @@ telescope.setup {
 
 require('telescope').load_extension('fzf')
 
+-- Load lazygit extension if available
+local status_ok, _ = pcall(require, "lazygit")
+if status_ok then
+  require('telescope').load_extension('lazygit')
+end
+
 local M = {}
 
 function M.find_files()

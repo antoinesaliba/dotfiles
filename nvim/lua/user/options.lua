@@ -1,12 +1,24 @@
 --vim.opt.leader key
-vim.g.mapleader                        = " "
-vim.opt.undodir                        = vim.fn.expand('~/.vim/undo')
+vim.g.mapleader                              = " "
+vim.opt.undodir                              = vim.fn.expand('~/.vim/undo')
+
+-- LazyGit configuration (must be set EARLY before plugin loads)
+vim.g.lazygit_floating_window_winblend       = 0                                    -- transparency of floating window
+vim.g.lazygit_floating_window_scaling_factor = 0.9                                  -- scaling factor for floating window
+vim.g.lazygit_floating_window_border_chars   = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' } -- customize lazygit popup window border characters
+vim.g.lazygit_floating_window_use_plenary    = 0                                    -- disable plenary (try without it first)
+vim.g.lazygit_use_neovim_remote              = 0                                    -- disable neovim-remote since it's not installed
+vim.g.lazygit_use_custom_config_file_path    = 0                                    -- config file path is evaluated if this value is 1
+vim.g.lazygit_config_file_path               = ''                                   -- custom config file path
 
 --Hardcode which python so starting vim is faster
-vim.g.python_host_prog                 = '/usr/local/bin/python'
-vim.g.python3_host_prog                = '/usr/local/bin/python3'
+vim.g.python_host_prog                       = '/usr/local/bin/python'
+vim.g.python3_host_prog                      = '/usr/local/bin/python3'
 
-vim.g['plantuml_previewer#debug_mode'] = 1
+vim.g['test#go#options'] = '-v'
+
+
+vim.g['plantuml_previewer#debug_mode']       = 1
 
 local function find_ruby_project_root()
   local current_dir = vim.fn.expand('%:p:h')
@@ -39,8 +51,12 @@ end
 
 vim.g['test#custom_strategies'] = {
   custom_nearest = function()
-    if vim.bo.filetype ~= 'ruby' then
+    if vim.bo.filetype ~= 'ruby' and vim.bo.filetype ~= 'go' then
       vim.g['test#strategy'] = 'neovim'
+      vim.cmd('TestFile')
+    elseif vim.bo.filetype == 'go' then
+      vim.g['test#strategy'] = 'neovim'
+      vim.g['test#go#options'] = '-v'
       vim.cmd('TestFile')
     else
       local root = find_ruby_project_root()
@@ -96,7 +112,7 @@ vim.opt.expandtab               = true    --Converts tabs to spaces
 vim.opt.smartindent             = true    --Makes indenting smart
 vim.opt.number                  = true    --Line numbers
 vim.opt.relativenumber          = true    --Relative line numbers
-vim.opt.background              = 'light'  --Tell vim what the background color looks like
+vim.opt.background              = 'light' --Tell vim what the background color looks like
 vim.opt.backup                  = false   --This is recommended by coc
 vim.opt.writebackup             = false   --This is recommended by coc
 vim.opt.updatetime              = 300     --Faster completion
