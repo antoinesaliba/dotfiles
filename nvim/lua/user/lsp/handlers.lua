@@ -1,25 +1,24 @@
 local M = {}
 
--- TODO: backfill this to template
+-- Modern diagnostic configuration for Neovim 0.11+ (correct syntax)
 M.setup = function()
-  local signs = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn",  text = "" },
-    { name = "DiagnosticSignHint",  text = "" },
-    { name = "DiagnosticSignInfo",  text = "" },
-  }
-
-  for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-  end
+  -- Configure signs using the modern approach with compatible symbols
+  vim.diagnostic.config({
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = "●",
+        [vim.diagnostic.severity.WARN] = "▲", 
+        [vim.diagnostic.severity.HINT] = "◆",
+        [vim.diagnostic.severity.INFO] = "○",
+      },
+    },
+  })
 
   local config = {
     -- disable virtual text
     virtual_text = false,
-    -- show signs
-    signs = {
-      active = signs,
-    },
+    -- signs are configured above
+    signs = true,
     update_in_insert = false,
     underline = false,
     severity_sort = true,
@@ -42,10 +41,6 @@ M.setup = function()
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
   })
-
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    signs = true,
-  })
 end
 
 local function lsp_highlight_document(client)
@@ -55,19 +50,16 @@ local function lsp_highlight_document(client)
     return
   end
   illuminate.on_attach(client)
-  -- end
 end
 
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = false }
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
   vim.api.nvim_buf_set_keymap(
@@ -84,16 +76,13 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-  -- vim.notify(client.name .. " starting...")
-  -- TODO: refactor this into a method that checks if string in list
-  if client.name == "tsserver" then
-    client.server_capabilities.document_formatting = false
+  -- Disable formatting for specific servers (let none-ls handle it)
+  if client.name == "tsserver" or client.name == "ts_ls" then
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end
 
-  -- if client.resolved_capabilities.document_formatting then
-  --   vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-  -- end
-
+  -- Setup keymaps and highlighting
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
 end

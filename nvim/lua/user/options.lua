@@ -2,6 +2,9 @@
 vim.g.mapleader                              = " "
 vim.opt.undodir                              = vim.fn.expand('~/.vim/undo')
 
+-- Sign column settings (required for LSP diagnostic signs)
+vim.opt.signcolumn                           = "yes"  -- Always show sign column
+
 -- LazyGit configuration (must be set EARLY before plugin loads)
 vim.g.lazygit_floating_window_winblend       = 0                                    -- transparency of floating window
 vim.g.lazygit_floating_window_scaling_factor = 0.9                                  -- scaling factor for floating window

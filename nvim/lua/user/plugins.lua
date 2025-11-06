@@ -80,10 +80,10 @@ return packer.startup(function(use)
   -- use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
   -- LSP
-  use "neovim/nvim-lspconfig"           -- enable LSP
-  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
-  use "tamago324/nlsp-settings.nvim"    -- language server settings defined in json for
-  use "nvimtools/none-ls.nvim" -- for formatters and linters
+  use "neovim/nvim-lspconfig"             -- enable LSP (fallback for older Neovim versions)
+  use "williamboman/mason.nvim"           -- modern package manager for LSP servers, DAP servers, linters, and formatters
+  use "williamboman/mason-lspconfig.nvim" -- bridges mason.nvim with lspconfig
+  use "nvimtools/none-ls.nvim"            -- for formatters and linters
   use "jose-elias-alvarez/typescript.nvim"
 
   -- Telescope
