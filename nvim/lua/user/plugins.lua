@@ -83,8 +83,15 @@ return packer.startup(function(use)
   use "neovim/nvim-lspconfig"             -- enable LSP (fallback for older Neovim versions)
   use "williamboman/mason.nvim"           -- modern package manager for LSP servers, DAP servers, linters, and formatters
   use "williamboman/mason-lspconfig.nvim" -- bridges mason.nvim with lspconfig
-  use "nvimtools/none-ls.nvim"            -- for formatters and linters
+  use "stevearc/conform.nvim"             -- modern formatter
+  use "mfussenegger/nvim-lint"          -- modern linter
   use "jose-elias-alvarez/typescript.nvim"
+
+  -- DAP (Debug Adapter Protocol)
+  use "mfussenegger/nvim-dap"
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use "leoluz/nvim-dap-go"
+  use "jay-babu/mason-nvim-dap.nvim"
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"

@@ -100,3 +100,31 @@ keymap("n", "<space>lg", "<cmd>lua _Toggleterm_lazygit()<CR>", opts)  -- Fallbac
 
 keymap("n", "<Tab>", "gT", opts)
 keymap("n", "=", "gt", opts)
+
+-- DAP (Debug Adapter Protocol) --
+keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
+keymap("n", "<leader>dB", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", opts)
+keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
+keymap("n", "<leader>da", "<cmd>lua require'dap'.continue({ before = get_args })<cr>", opts)
+keymap("n", "<leader>dC", "<cmd>lua require'dap'.run_to_cursor()<cr>", opts)
+keymap("n", "<leader>dg", "<cmd>lua require'dap'.goto_()<cr>", opts)
+keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
+keymap("n", "<leader>dj", "<cmd>lua require'dap'.down()<cr>", opts)
+keymap("n", "<leader>dk", "<cmd>lua require'dap'.up()<cr>", opts)
+keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
+keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
+keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
+keymap("n", "<leader>dp", "<cmd>lua require'dap'.pause()<cr>", opts)
+keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
+keymap("n", "<leader>ds", "<cmd>lua require'dap'.session()<cr>", opts)
+keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
+keymap("n", "<leader>dw", "<cmd>lua require'dap.ui.widgets'.hover()<cr>", opts)
+keymap("n", "<leader>dW", "<cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<cr>", opts)
+
+-- DAP UI --
+keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
+keymap("n", "<leader>de", "<cmd>lua require'dapui'.eval()<cr>", opts)
+
+-- DAP Go specific --
+keymap("n", "<leader>dgt", "<cmd>lua require'dap-go'.debug_test()<cr>", opts)
+keymap("n", "<leader>dgl", "<cmd>lua require'dap-go'.debug_last()<cr>", opts)
