@@ -55,7 +55,11 @@ return packer.startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
-  use "akinsho/toggleterm.nvim"
+  use {
+    "akinsho/toggleterm.nvim",
+    cmd = { "ToggleTerm", "TermExec" },
+    keys = { "<c-q>" },
+  }
   -- use "ahmedkhalf/project.nvim"
   use "lewis6991/impatient.nvim"
   -- use "lukas-reineke/indent-blankline.nvim"
@@ -93,10 +97,14 @@ return packer.startup(function(use)
   use "leoluz/nvim-dap-go"
   use "jay-babu/mason-nvim-dap.nvim"
 
-  -- Telescope
-  use "nvim-telescope/telescope.nvim"
+  -- Telescope (lazy load)
+  use {
+    "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
+    keys = { ";", "<leader>f" },
+  }
 
-  -- Treesitter
+  -- Treesitter (load immediately for syntax highlighting)
   use {
     "nvim-treesitter/nvim-treesitter",
     run = function()
@@ -141,7 +149,11 @@ return packer.startup(function(use)
   use 'https://github.com/tyru/open-browser.vim.git'
   use 'https://github.com/weirongxu/plantuml-previewer.vim.git'
 
-  use 'kdheepak/lazygit.nvim'
+  use {
+    'kdheepak/lazygit.nvim',
+    cmd = "LazyGit",
+    keys = { "<space>gg", "<space>ww", "<space>lg" },
+  }
   use 'sheerun/vim-polyglot'
   use 'github/copilot.vim'
 

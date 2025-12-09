@@ -1,4 +1,5 @@
--- Mason setup for package management
+-- Defer Mason setup to improve startup time
+vim.defer_fn(function()
 local mason_status_ok, mason = pcall(require, "mason")
 if not mason_status_ok then
   return
@@ -88,5 +89,6 @@ else
     if registry_ok then
       ensure_tools_installed()
     end
-  end, 1000)
+  end, 2000)
 end
+end, 100) -- Close the main defer_fn for Mason setup
